@@ -1,0 +1,60 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+button {
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  bottom: 30px;
+  width: 250px;
+  padding: 25px;
+  border-radius: 34px;
+  background: #ffffff;
+  box-shadow: 21px 21px 30px #f0f0f0, -21px -21px 30px #ffffff;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+button.removeVertice {
+  width: 60px;
+  height: 100%;
+  background: none;
+  border: none;
+}
