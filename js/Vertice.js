@@ -49,6 +49,10 @@ class Vertice {
       ctx.stroke()
     })
   }
+
+  connect(vertice) {
+    this.adj.push(vertice)
+  }
 }
 
 export default Vertice

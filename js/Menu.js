@@ -6,7 +6,9 @@ class Menu {
     this.vertices = vertices
     this.verticesSelection = document.querySelector('.menu .vertices-select')
     this.adjsList = document.querySelector('.menu .adjs-list')
+    this.adjsSelect = document.querySelector('.menu .adjs-select')
     this.verticeBtn = document.querySelector('.create-vertice-btn')
+    this.connectBtn = document.querySelector('.create-connect-btn')
     this.verticeValue = document.getElementById('vertice-value')
     this.verticeX = document.getElementById('vertice-x')
     this.verticeY = document.getElementById('vertice-y')
@@ -30,13 +32,21 @@ class Menu {
       this.draw()
     })
 
+    this.connectBtn.addEventListener('click', e => {
+      const vertice = this.vertices[Number(this.adjsSelect.selectedIndex)]
+
+      // definir uma variavel com vertice selecionado e tirar esse iterador
+      this.vertices.find(ver => ver.selected).connect(vertice)
+      this.draw()
+    })
+
     this.verticesSelection.addEventListener('change', e => {
       const active = Number(e.target.value)
       // abstrair para um metodo!
       this.vertices.forEach(vertice => {
         if(vertice.value === active) {
           vertice.selected = true
-          this.renderAdjs(vertice.adj)
+          this.renderAdjs(vertice)
         } else {
           vertice.selected = false
         }
@@ -56,10 +66,20 @@ class Menu {
     this.draw()
   }
 
-  renderAdjs(adjs) {
-    if(!adjs) return
-    this.adjsHTML = adjs.reduce((html, adj) => {
+  renderAdjs(vertice) {
+    if(!vertice.adj) return
+
+    this.adjsHTML = vertice.adj.reduce((html, adj) => {
       return html += `<li>${adj.value}</li>`
+    }, '')
+
+    this.adjsSelect.innerHTML = this.vertices.reduce((html, currentVertice) => {
+      if(vertice.adj.includes(currentVertice))
+        return html
+
+      if(!(vertice.value === currentVertice.value))
+        return html += `<option value="${currentVertice.value}">${currentVertice.value}</option>`
+      return html
     }, '')
 
     this.adjsList.innerHTML = this.adjsHTML
