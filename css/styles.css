@@ -31,10 +31,14 @@ button {
   left: 30px;
   bottom: 30px;
   width: 250px;
-  padding: 25px;
+  padding: 10px;
   border-radius: 34px;
   background: #ffffff;
   box-shadow: 21px 21px 30px #f0f0f0, -21px -21px 30px #ffffff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .menu ul {
@@ -47,9 +51,13 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 10px;
-  height: 30px;
   margin-bottom: 10px;
+}
+
+.menu select {
+  width: 80px;
+  height: 30px;
+  font-size: 14px;
 }
 
 button.removeVertice {

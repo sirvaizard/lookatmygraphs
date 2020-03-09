@@ -9,12 +9,14 @@ import Menu from './Menu.js'
   const ctx = canvas.getContext('2d')
   let dragging = null;
 
+  const vertices = []
+
+  const menu = new Menu(vertices, draw)
+
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     vertices.forEach(vertice => vertice.draw(ctx))
   }
-
-  const vertices = []
 
   vertices.push(new Vertice(990, 346, 10, 20))
   vertices.push(new Vertice(863, 342, 8, 20))
@@ -41,11 +43,16 @@ import Menu from './Menu.js'
     const x = e.pageX
     const y = e.pageY
 
-    vertices.forEach(vertice => {
+    // define x,y no form
+    menu.setCoords(x, y)
+
+
+    vertices.forEach((vertice, index) => {
       if((x > vertice.x - vertice.radius && x < vertice.x + vertice.radius)
         && (y > vertice.y - vertice.radius && y < vertice.y + vertice.radius)) {
           vertice.dragging = true
           dragging = vertice
+          menu.setSelected(index)
         }
     
     canvas.addEventListener('mousemove', moveVertice)
@@ -63,8 +70,6 @@ import Menu from './Menu.js'
     draw()
   })
 
-  const menu = new Menu()
-  menu.render(vertices)
-
+  menu.render()
   draw()
 })()
