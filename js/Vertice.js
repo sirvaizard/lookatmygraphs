@@ -9,6 +9,7 @@ class Vertice {
     this.selected = false
   }
 
+  // depreciado ???
   draw(ctx) {
     this.drawEdges(ctx)
     this.drawVertices(ctx)
