@@ -1,4 +1,5 @@
 import Vertice from './Vertice.js'
+import findAngle from './utils/findAngle.js'
 
 class Menu {
   constructor(vertices, draw) {
@@ -42,21 +43,32 @@ class Menu {
     })
 
     this.connectBtn.addEventListener('click', e => {
+      if(!this.adjSelected || !this.verticeSelected) return
+
       const toConnectVertice = this.vertices.find(ver => ver.value === this.adjSelected)
 
       // definir uma variavel com vertice selecionado e tirar esse iterador
       // const vertice = this.vertices.find(ver => ver.selected)
       const vertice = this.vertices.find(ver => ver.value === this.verticeSelected)
 
-      console.log(this.adjSelected, this.verticeSelected)
       vertice.connect(toConnectVertice)
+
+      this.adjSelected = Number(this.adjsSelect.options[this.adjsSelect.selectedIndex].value) || null
 
       this.renderAdjs(vertice)
       this.draw()
+
+
+      // deletar tudo aqui
+      // trocar sinal pois não funcionaaaa o y normalmente 
+      const derivada = (toConnectVertice.x - vertice.x) / (-toConnectVertice.y - (-vertice.y))
+      console.log(findAngle(derivada))
     })
 
     this.verticesSelection.addEventListener('change', e => {
-      this.verticeSelected = this.verticesSelection.selectedIndex
+      if(this.verticesSelection.options[this.verticesSelection.selectedIndex])
+        this.verticeSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
+
       const active = Number(e.target.value)
       // abstrair para um metodo!
       this.vertices.forEach(vertice => {
@@ -79,6 +91,7 @@ class Menu {
   setCoords(x, y) {
     this.verticeX.value = x
     this.verticeY.value = y
+    console.log(this.verticeSelected, this.adjSelected)
   }
 
   setSelected(index) {
@@ -96,14 +109,11 @@ class Menu {
   renderAdjs(vertice) {
     if(!vertice.adj) return
 
-    if(this.adjsSelect.options[this.adjsSelect.selectedIndex])
-      this.adjSelected = Number(this.adjsSelect.options[this.adjsSelect.selectedIndex].value)
-
     this.adjsHTML = vertice.adj.reduce((html, adj) => {
       return html += `<li>${adj.value}</li>`
     }, '')
 
-    this.adjsSelect.innerHTML = this.vertices.reduce((html, currentVertice) => {
+    const adjacentSelectValue = this.vertices.reduce((html, currentVertice) => {
       if(vertice.adj.includes(currentVertice))
         return html
 
@@ -112,7 +122,14 @@ class Menu {
       return html
     }, '')
 
+    this.adjsSelect.innerHTML = adjacentSelectValue
     this.adjsList.innerHTML = this.adjsHTML
+
+    if(this.adjsSelect.options[this.adjsSelect.selectedIndex])
+      this.adjSelected = Number(this.adjsSelect.options[this.adjsSelect.selectedIndex].value)
+
+    if(!adjacentSelectValue)
+      this.adjSelected = null
   }
 
   render() {

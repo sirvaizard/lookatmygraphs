@@ -47,9 +47,6 @@ import Menu from './Menu.js'
     // define x,y no form
     menu.setCoords(x, y)
 
-    // delete
-    console.log(menu.verticeSelected, menu.adjSelected)
-
     vertices.forEach((vertice, index) => {
       if((x > vertice.x - vertice.radius && x < vertice.x + vertice.radius)
         && (y > vertice.y - vertice.radius && y < vertice.y + vertice.radius)) {
