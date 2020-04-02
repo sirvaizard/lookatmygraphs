@@ -108,9 +108,16 @@ class Menu {
 
   renderAdjs(vertice) {
     if(!vertice.adj) return
-
-    this.adjsHTML = vertice.adj.reduce((html, adj) => {
-      return html += `<li>${adj.value}</li>`
+    
+    this.adjsHTML = vertice.adj.reduce((html, adj, index) => {
+      return html += `<li class="adj-item">
+          ${vertice.value}
+          <i class="fas fa-long-arrow-alt-right fa-lg" style="color: #444;"></i>
+          ${adj.value}
+          <button class="delete-adj-btn" data-id=${index}>
+            <i class="far fa-trash-alt fa-2x" style="color: #444;"></i>
+          </button>
+        </li>`
     }, '')
 
     const adjacentSelectValue = this.vertices.reduce((html, currentVertice) => {
@@ -124,6 +131,14 @@ class Menu {
 
     this.adjsSelect.innerHTML = adjacentSelectValue
     this.adjsList.innerHTML = this.adjsHTML
+
+    // add event listener to all trash icons
+    const buttons = document.querySelectorAll('button.delete-adj-btn')
+    buttons.forEach(button => button.addEventListener('click', () => {
+      vertice.removeAdj(button.getAttribute('data-id'))
+      this.renderAdjs(vertice)
+      this.draw()
+    }))
 
     if(this.adjsSelect.options[this.adjsSelect.selectedIndex])
       this.adjSelected = Number(this.adjsSelect.options[this.adjsSelect.selectedIndex].value)

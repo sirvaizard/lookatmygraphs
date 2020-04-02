@@ -17,34 +17,50 @@
   <body>
     <canvas id="canvas" height="100%" width="100%"></canvas>
     <div class="menu">
-      <div class="vertices-info">
-        <h1>Configurações</h1>
+      <h1>Configurações</h1>
+      <div class="add-vertice menu-container">
+        <form>
+          <h2>Adicionar vertice:</h2>
+          <small
+            >Clique na tela para pegar as coordenadas automaticamente</small
+          >
+          <div class="add-vertice-value">
+            <label for="vertice-value">Valor: </label>
+            <input type="number" id="vertice-value" placeholder="0" />
+          </div>
 
-        <h2>Selecionar Vertice</h2>
-        <select class="vertices-select"></select>
+          <div class="coords">
+            <label for="vertice-x">X: </label>
+            <input type="number" placeholder="x" id="vertice-x" />
+
+            <label for="vertice-y">Y: </label>
+            <input type="number" placeholder="y" id="vertice-y" />
+          </div>
+          <button class="menu-btn create-vertice-btn">Criar</button>
+        </form>
+      </div>
+
+      <div class="vertices-info menu-container">
+        <h2>Conectar Vertices</h2>
+        <div class="select-vertices">
+          <label for="select-from-select">Selecionado</label>
+          <select
+            class="vertices-select menu-select"
+            id="select-from-select"
+          ></select>
+
+          <label for="connect-to-select">Conectar com: </label>
+          <select
+            class="adjs-select menu-select"
+            id="connect-to-select"
+          ></select>
+        </div>
+
+        <button class="menu-btn create-connect-btn">Conectar</button>
 
         <p>Adjacências</p>
         <ul class="adjs-list"></ul>
-
-        <label for="">Conectar com: </label>
-        <select class="adjs-select"></select>
-        <button class="create-connect-btn">Conectar</button>
       </div>
-
-      <form>
-        <h2>Adicionar vertice:</h2>
-        <small>Clique na tela para pegar as coordenadas automaticamente</small>
-        <label for="vertice-value">Valor: </label>
-        <input type="number" id="vertice-value" placeholder="valor" />
-        <div class="coord">
-          <label for="vertice-x">X: </label>
-          <input type="number" placeholder="x" id="vertice-x" />
-
-          <label for="vertice-y">Y: </label>
-          <input type="number" placeholder="y" id="vertice-y" />
-        </div>
-        <button class="create-vertice-btn">Criar</button>
-      </form>
     </div>
     <script type="module" src="./js/index.js"></script>
   </body>

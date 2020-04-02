@@ -9,12 +9,6 @@ class Vertice {
     this.selected = false
   }
 
-  // depreciado ???
-  draw(ctx) {
-    this.drawEdges(ctx)
-    this.drawVertices(ctx)
-  }
-
   drawVertices(ctx) {
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false)
@@ -42,39 +36,19 @@ class Vertice {
     ctx.fillText(this.value, this.x, this.y + 5)
   }
 
+  removeAdj(index) {
+    this.adj.splice(index, 1)
+  }
+
   drawEdges(ctx) {
-    // this.adj.forEach(vertice => {
-        // ctx.beginPath()
-    // ctx.moveTo(this.x, this.y)
-    // ctx.lineTo(vertice.x, vertice.y)
-    // ctx.stroke()
-    //}
-    //   //
-    //   const dx = Math.abs(this.x - vertice.x) // adjacente
-    //   const dy = Math.abs(this.y - vertice.y) // oposto
-    //   const hipotenusa = Math.hypot(dx, dy)
-    //   const cos = dy / hipotenusa
-    //   const sin = dx / hipotenusa
-    //   const tan = dx / dy
-
-    //   const newHip = hipotenusa - this.radius
-    //   const newDx = cos * newHip
-    //   const newDy = sin * newHip
-
-    //   //const newX = vertice.x + (Math.abs(vertice.x - this.x) - newDx)
-    //   const newX = vertice.x
-    //   const newY = vertice.y
-
-    //   console.log(newX, newY)
-
     this.adj.forEach(vertice => {
       const from = {x: this.x, y: this.y, radius: this.radius}
       const to = {x: vertice.x, y: vertice.y, radius: vertice.radius}
 
-      var arrowLength = 15;
-      var angle = Math.atan(Math.abs(from.y - to.y) / Math.abs(from.x - to.x));
-      var deltaY = from.radius * Math.sin(angle);
-      var deltaX = to.radius * Math.cos(angle);
+      const arrowLength = 15;
+      const angle = Math.atan(Math.abs(from.y - to.y) / Math.abs(from.x - to.x));
+      const deltaY = from.radius * Math.sin(angle);
+      const deltaX = to.radius * Math.cos(angle);
 
       ctx.beginPath();
       if (from.x < to.x) {
