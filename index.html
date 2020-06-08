@@ -14,6 +14,10 @@
   <canvas id="canvas" height="100%" width="100%"></canvas>
   <div class="menu">
     <h1>Configurações</h1>
+    <div class="menu-container">
+      <p>Cuidado!</p>
+      <button class="menu-btn red" data-delete-graph>Excluir Grafo</button>
+    </div>
     <div class="menu-container create-vertice-container">
       <h2>Adicionar vertice:</h2>
       <small>Clique na tela para pegar as coordenadas automaticamente</small>
@@ -35,20 +39,20 @@
         </div>
       </div>
 
-      <button class="menu-btn create-vertice-btn">Criar</button>
+      <button class="menu-btn green" data-create-vertice>Criar Vertice</button>
     </div>
 
     <div class="menu-container">
       <h2>Vertice Selecionado</h2>
       <label for="selected-vertice-input">Selecione: </label>
       <select class="selected-vertice-input" id="selected-vertice-input"></select>
-      <button class="menu-btn" disabled>Excluir</button>
+      <button class="menu-btn red" data-delete-vertice>Excluir Vertice</button>
     </div>
 
     <div class="menu-container">
       <h2>Algoritmos de Percurso</h2>
       <label for="value-to-find">Procurar por: </label>
-      <input type="number" class="value-to-find" id="value-to-find">
+      <input type="number" class="value-to-find" id="value-to-find" placeholder="ex 1">
 
       <label for="search-speed">Velocidade(ms): </label>
       <input type="number" class="search-speed" id="seach-speed" value="500" placeholder="ex 500" min="0">
@@ -85,8 +89,8 @@
     <button class="menu-btn" data-close-side-modal>Fechar</button>
   </div>
   <footer>
-    <p>Desenvolvido por victor<strong>@</strong><a href="https://github.com/sirvaizard">sirvaizard</a> com
-      <span>❤︎</span></p>
+    <p>Desenvolvido com <span>❤︎</span> por victor<strong>@</strong><a
+        href="https://github.com/sirvaizard">sirvaizard</a>.</p>
   </footer>
   <script type="module" src="./js/index.js"></script>
 </body>

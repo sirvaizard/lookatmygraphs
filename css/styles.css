@@ -1,6 +1,14 @@
 :root {
-  --menu-main-color: #333;
-  --menu-main-color-hover: #1791c2;
+  --menu-btn-hover: #1791c2;
+
+  --menu-btn-red: #c54545;
+  --menu-btn-red-hover: #883434;
+
+  --menu-btn-green: #90be39;
+  --menu-btn-green-hover: #6d912a;
+
+  --menu-btn-disabled: #616161;
+  --menu-btn-disabled-hover: #3f3f3f;
   
   --side-menu-width: 300px;
 }
@@ -118,19 +126,37 @@ footer strong {
 }
 
 .menu-btn:hover {
-  background-color: var(--menu-main-color-hover);
+  background-color: var(--menu-btn-hover);
   color: #fff;
+}
+
+.menu-btn.red {
+  color: #fff;
+  background-color: var(--menu-btn-red);
+}
+
+.menu-btn.red:hover {
+  background-color: var(--menu-btn-red-hover);
+}
+
+.menu-btn.green {
+  color: #fff;
+  background-color: var(--menu-btn-green);
+}
+
+.menu-btn.green:hover {
+  background-color: var(--menu-btn-green-hover);
 }
 
 .menu-btn:disabled {
   cursor: not-allowed;
-  background-color: rgba(195, 57, 57, 0.568);
+  background-color: var(--menu-btn-disabled);
   color: #fff;
   font-style: italic;
 }
 
 .menu-btn:disabled:hover {
-  background-color: rgba(195, 57, 57, 0.8);
+  background-color: var(--menu-btn-disabled-hover);
 }
 
 .menu-container {
@@ -201,6 +227,7 @@ li.adj-item {
   display: flex;
   flex: 1;
   background-color: #000000dd;
+  transition: visibility 0s linear 100ms, opacity 300ms;
 }
 
 .side-modal {
@@ -209,6 +236,7 @@ li.adj-item {
   align-items: center;
   justify-content: center;
   visibility: hidden;
+  opacity: 0;
 }
 
 .side-modal p {

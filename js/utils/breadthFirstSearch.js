@@ -17,7 +17,7 @@ export default async function breadhFirstSearch(vertice, toFind, canvas, sleep =
       }
 
       current.adj.forEach(edge => {
-        if (edge.destination && edge.destination.color === 0)
+        if (edge.destination.color === 0 && !toVisit.includes(edge.destination))
           toVisit.push(edge.destination)
       })
 
