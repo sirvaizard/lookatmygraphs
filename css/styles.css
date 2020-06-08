@@ -124,6 +124,15 @@ button.removeVertice {
   transition: 0.3s;
 }
 
+.menu-btn:disabled {
+  cursor: not-allowed;
+  background-color: rgb(185, 185, 185);
+}
+
+.menu-btn:disabled:hover {
+  background-color: rgb(167, 166, 166);
+}
+
 .menu-btn:hover {
   background-color: var(--menu-main-color-hover);
 }

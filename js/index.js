@@ -60,6 +60,7 @@ import Vertice from './Vertice.js'
   vertices[7].connect(vertices[8])
   vertices[7].connect(vertices[9])
   vertices[7].connect(vertices[10])
+  menu.setSelected(vertices[0], 0)
 
   window.addEventListener('resize', e => canvas.resize(window.innerWidth, window.innerHeight))
 

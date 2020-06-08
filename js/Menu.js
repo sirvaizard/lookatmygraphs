@@ -51,7 +51,7 @@ class Menu {
 
       this.renderAdjs(vertice)
       this.render()
-      this.setSelected(this.vertices.length - 1)
+      this.setSelected(vertice, this.vertices.length - 1)
       this.canvas.drawGraph(this.vertices)
     })
 
@@ -79,6 +79,7 @@ class Menu {
       // abstrair para um metodo!
       this.vertices.forEach(vertice => {
         if (vertice.value === active) {
+          this.selectedVertice = vertice
           vertice.selected = true
           this.renderAdjs(vertice)
         } else {
