@@ -14,49 +14,71 @@
   <canvas id="canvas" height="100%" width="100%"></canvas>
   <div class="menu">
     <h1>Configurações</h1>
-    <div class="add-vertice menu-container">
-      <form>
-        <h2>Adicionar vertice:</h2>
-        <small>Clique na tela para pegar as coordenadas automaticamente</small>
-        <div class="add-vertice-value">
-          <label for="vertice-value">Valor: </label>
+    <div class="menu-container create-vertice-container">
+      <h2>Adicionar vertice:</h2>
+      <small>Clique na tela para pegar as coordenadas automaticamente</small>
+
+      <div class="inputs-flex-container">
+        <div class="flex-column">
+          <label for="vertice-value">Valor</label>
           <input type="number" id="vertice-value" placeholder="0" />
         </div>
 
-        <div class="coords">
-          <label for="vertice-x">X: </label>
-          <input type="number" placeholder="x" id="vertice-x" />
-
-          <label for="vertice-y">Y: </label>
-          <input type="number" placeholder="y" id="vertice-y" />
+        <div class="flex-column">
+          <label for="vertice-x">X</label>
+          <input type="number" placeholder="X" id="vertice-x" />
         </div>
-        <button class="menu-btn create-vertice-btn">Criar</button>
-      </form>
+
+        <div class="flex-column">
+          <label for="vertice-y">Y</label>
+          <input type="number" placeholder="Y" id="vertice-y" />
+        </div>
+      </div>
+
+      <button class="menu-btn create-vertice-btn">Criar</button>
     </div>
 
-    <div class="vertices-info menu-container">
+    <div class="menu-container">
+      <h2>Vertice Selecionado</h2>
+      <label for="selected-vertice-input">Selecione: </label>
+      <select class="selected-vertice-input" id="selected-vertice-input"></select>
+      <button class="menu-btn" disabled>Excluir</button>
+    </div>
+
+    <div class="menu-container">
+      <h2>Algoritmos de Percurso</h2>
+      <label for="value-to-find">Procurar por: </label>
+      <input type="number" class="value-to-find" id="value-to-find">
+
+      <label for="search-speed">Velocidade(ms): </label>
+      <input type="number" class="search-speed" id="seach-speed" value="500" placeholder="ex 500" min="0">
+
+      <button class="menu-btn" data-breadth-first-search>Busca em Largura</button>
+      <button class="menu-btn" data-depth-first-search>Busca em Profundidade</button>
+      <button class="menu-btn" data-dijkstra disabled>Menor Caminho</button>
+    </div>
+
+    <div class="menu-container">
       <h2>Conectar Vertices</h2>
-      <div class="select-vertices">
-        <label for="select-from-select">Selecionado</label>
-        <select class="vertices-select menu-select" id="select-from-select"></select>
+      <div class="inputs-flex-container">
+        <div class="flex-column">
+          <label for="connect-to-select">Conectar com</label>
+          <select class="adjs-select" id="connect-to-select"></select>
+        </div>
 
-        <label for="vertice-to-search">Procurar por: </label>
-        <input type="number" class="value-to-find" id="vertice-to-search">
-        <label for="search-speed">Velocidade(1s padrão): </label>
-        <input type="number" class="search-speed" id="seach-speed" placeholder="Milissegundos" min="0">
-        <button class="menu-btn" id="bfs-button">Busca em Largura</button>
-        <button class="menu-btn" id="dfs-button">Busca em Profundidade</button>
-
-        <label for="connect-to-select">Conectar com: </label>
-        <select class="adjs-select menu-select" id="connect-to-select"></select>
+        <div class="flex-column">
+          <label for="edge-cost">Custo</label>
+          <input type="number" id="edge-cost" placeholder="0" disabled />
+        </div>
       </div>
 
       <button class="menu-btn create-connect-btn">Conectar</button>
       <div class="adj-container">
-        <p>Adjacências</p>
+        <p>Conexões atuais</p>
         <ul class="adjs-list"></ul>
       </div>
     </div>
+
   </div>
   <div class="modal side-modal">
     <p>Procurando...</p>

@@ -10,4 +10,5 @@ Disponível em: [https://sirvaizard.github.io/lookatmygraphs/](https://sirvaizar
 - Remover renderização de listas de adjacências sem necessidade
 - Memorizar posições do inicio e fim de aresta, e posição do texto, e apenas recalcular quando preciso
 - Separar os event handlers do Menu em funções ou arquivos separados
+- Exportar e importar grafo
 - Adicionar funcionalidades dijkstra e mst?

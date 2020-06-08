@@ -7,7 +7,7 @@ class Menu {
   constructor(vertices, canvas) {
     this.canvas = canvas // remover
     this.vertices = vertices
-    this.verticesSelection = document.querySelector('.menu .vertices-select')
+    this.verticesSelection = document.querySelector('.menu .selected-vertice-input')
     this.adjsList = document.querySelector('.menu .adjs-list')
     this.adjsSelect = document.querySelector('.menu .adjs-select')
     this.verticeBtn = document.querySelector('.create-vertice-btn')
@@ -15,13 +15,16 @@ class Menu {
     this.verticeValue = document.getElementById('vertice-value')
     this.verticeX = document.getElementById('vertice-x')
     this.verticeY = document.getElementById('vertice-y')
-    this.bfsButton = document.getElementById('bfs-button')
-    this.dfsButton = document.getElementById('dfs-button')
+
+    this.bfsButton = document.querySelector('button[data-breadth-first-search]')
+    this.dfsButton = document.querySelector('button[data-depth-first-search]')
     this.valueToFind = document.querySelector('.value-to-find')
+    this.searchSpeedInput = document.querySelector('.search-speed')
+
     this.sideModal = document.querySelector('.side-modal')
     this.closeSideModalBtn = document.querySelector('button[data-close-side-modal]')
     this.modalText = document.querySelector('.side-modal p')
-    this.serachSpeedInput = document.querySelector('.search-speed')
+
     this.adjsHTML = ''
     this.verticeSelected = 0
     this.adjSelected = null
@@ -99,7 +102,7 @@ class Menu {
       breadthFirstSearch(this.selectedVertice,
         Number(this.valueToFind.value),
         this.canvas,
-        Math.abs(Number(this.serachSpeedInput.value)) || 1000
+        Math.abs(Number(this.searchSpeedInput.value)) || 1000
       ).then(found => {
         this.handleFinishSearch(found)
       })
@@ -110,7 +113,7 @@ class Menu {
       depthFirstSearch(this.selectedVertice,
         Number(this.valueToFind.value),
         this.canvas,
-        Math.abs(Number(this.serachSpeedInput.value)) || 1000
+        Math.abs(Number(this.searchSpeedInput.value)) || 1000
       ).then(found => {
         this.handleFinishSearch(found)
       })

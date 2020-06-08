@@ -1,6 +1,6 @@
 :root {
-  --menu-main-color: #1791c2;
-  --menu-main-color-hover: #137da7;
+  --menu-main-color: #333;
+  --menu-main-color-hover: #1791c2;
   
   --side-menu-width: 300px;
 }
@@ -43,7 +43,7 @@ button {
   padding: 10px;
   background-color: #fff;
 
-  box-shadow: 14px 0px 30px -12px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 0px 20px 2px rgba(0, 0, 0, 0.50);
 
   display: flex;
   flex: 1;
@@ -84,84 +84,65 @@ button {
   margin-bottom: 5px;
 }
 
-button.removeVertice {
-  width: 60px;
-  height: 100%;
-  background: none;
-  border: none;
-}
-
-.coords {
-  margin-bottom: 10px;
-}
-
-.add-vertice input {
-  width: 70px;
-  height: 30px;
-  border: none;
-  border-bottom: 2px solid var(--menu-main-color);
-  text-align: center;
-  font-size: 16px;
-  color: #333;
-}
-
-.coords label,
-.add-vertice-value label {
-  color: var(--menu-main-color);
-  font-weight: bold;
-}
-
 .menu-btn {
-  color: #fff;
-  background-color: var(--menu-main-color);
+  margin: 5px 0;
   padding: 10px 15px;
-  font-size: 18px;
+  width: 170px;
+  font-size: 12px;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   transition: 0.3s;
 }
 
+.menu-btn:hover {
+  background-color: var(--menu-main-color-hover);
+  color: #fff;
+}
+
 .menu-btn:disabled {
   cursor: not-allowed;
-  background-color: rgb(185, 185, 185);
+  background-color: rgba(195, 57, 57, 0.568);
+  color: #fff;
+  font-style: italic;
 }
 
 .menu-btn:disabled:hover {
-  background-color: rgb(167, 166, 166);
-}
-
-.menu-btn:hover {
-  background-color: var(--menu-main-color-hover);
+  background-color: rgba(195, 57, 57, 0.8);
 }
 
 .menu-container {
+  display: flex;
   flex: 1;
-  border-bottom: 2px solid white;
-}
-
-.add-vertice form {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  
+  padding: 10px 0;
+
+  border-bottom: 2px solid #e2e2e2;
 }
 
-.menu-select {
-  border: none;
-  background-color: #eeeeee;
-  font-weight: bold;
-  padding-left: 15px;
+.menu-container input[type="number"] {
+  width: 70px;
+  height: 25px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 16px;
 }
 
-.vertices-info,
-.select-vertices {
+.inputs-flex-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.select-vertices {
+  flex: 1;
+  width: 100%;
+  justify-content: space-around;
   margin-bottom: 10px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 ul.adjs-list {

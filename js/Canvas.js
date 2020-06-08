@@ -13,10 +13,10 @@ class Canvas {
     this.textColor = '#333'
     this.textAlign = 'center'
     this.vertexColor = '#fff'
-    this.vertexColorFound = '#bf2a2a'
+    this.vertexColorFound = '#a3de45'
     this.vertexColorVisiting = '#1791c2'
     this.vertexVisitingTextColor = '#fff'
-    this.selectedBorder = '#222'
+    this.selectedBorder = '#a3de45'
     this.activeBorder = '#000'
     this.borderWidth = 3
 

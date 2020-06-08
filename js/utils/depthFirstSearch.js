@@ -1,4 +1,4 @@
-export default async function depthFirstSearch(vertice, toFind, canvas, sleep = 1000) {
+export default async function depthFirstSearch(vertice, toFind, canvas, sleep = 500) {
   return new Promise(async resolve => {
     const toVisit = [vertice]
     let found = false
