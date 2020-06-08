@@ -1,6 +1,8 @@
 :root {
   --menu-main-color: #1791c2;
   --menu-main-color-hover: #137da7;
+  
+  --side-menu-width: 300px;
 }
 
 * {
@@ -15,10 +17,6 @@ html,
 body {
   height: 100%;
   font-family: "Roboto", sans-serif;
-}
-
-canvas {
-  display: block;
 }
 
 h1 {
@@ -41,7 +39,7 @@ button {
   top: 0;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: var(--side-menu-width);
   padding: 10px;
   background-color: #fff;
 
@@ -203,7 +201,7 @@ li.adj-item {
 }
 
 .side-modal {
-  width: 300px;
+  width: var(--side-menu-width);
   flex-direction: column;
   align-items: center;
   justify-content: center;

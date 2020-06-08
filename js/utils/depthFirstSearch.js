@@ -5,7 +5,6 @@ export default async function depthFirstSearch(vertice, toFind, canvas, sleep = 
 
     while (toVisit.length) {
       let current = toVisit.shift()
-
       current.color = 1
       canvas.drawGraph()
 
@@ -17,8 +16,12 @@ export default async function depthFirstSearch(vertice, toFind, canvas, sleep = 
         break
       }
 
+      current.adj.forEach(edge => {
+        if (edge.destination.color === 0 && !toVisit.includes(edge.destination))
+          toVisit.unshift(edge.destination)
+      })
+
       await new Promise(resolve => setTimeout(resolve, sleep))
-      current.adj.forEach(edge => toVisit.unshift(edge.destination))
     }
 
     resolve(found)
