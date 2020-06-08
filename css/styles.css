@@ -1,6 +1,6 @@
 :root {
-  --menu-main-color: #d4557b;
-  --menu-main-color-hover: #be3a62;
+  --menu-main-color: #1791c2;
+  --menu-main-color-hover: #137da7;
 }
 
 * {
@@ -15,6 +15,10 @@ html,
 body {
   height: 100%;
   font-family: "Roboto", sans-serif;
+}
+
+canvas {
+  display: block;
 }
 
 h1 {
@@ -39,14 +43,16 @@ button {
   bottom: 0;
   width: 300px;
   padding: 10px;
-  background-color: #fee140;
-  background-image: linear-gradient(180deg, #fee140 0%, #fa709a 100%);
+  background-color: #fff;
 
   box-shadow: 14px 0px 30px -12px rgba(0, 0, 0, 0.15);
 
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
+
+  overflow-y: auto;
 }
 
 .menu ul {
@@ -110,11 +116,11 @@ button.removeVertice {
 .menu-btn {
   color: #fff;
   background-color: var(--menu-main-color);
-  padding: 7px 15px;
+  padding: 10px 15px;
   font-size: 18px;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   transition: 0.3s;
 }
 
@@ -123,11 +129,8 @@ button.removeVertice {
 }
 
 .menu-container {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 10px 5px;
-  margin-bottom: 10px;
-  width: 100%;
+  flex: 1;
+  border-bottom: 2px solid white;
 }
 
 .add-vertice form {
@@ -168,4 +171,42 @@ li.adj-item {
   border: none;
   background-color: transparent;
   height: 40px;
+}
+
+.adj-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  flex: 1;
+  background-color: #000000dd;
+}
+
+.side-modal {
+  width: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+}
+
+.side-modal p {
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+}
+
+.side-modal button {
+  visibility: hidden;
 }
