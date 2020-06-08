@@ -34,6 +34,28 @@ button {
   cursor: pointer;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer p {
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  padding: 4px 0;
+}
+
+footer a, footer span {
+  color: #ce4545;
+  font-weight: bold;
+}
+
+footer strong {
+  color: #444444;
+}
+
 .menu {
   position: absolute;
   top: 0;
