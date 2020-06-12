@@ -7,7 +7,7 @@ import feedInitalGraph from './utils/feedInitialGraph.js'
   const canvas = new Canvas(document.getElementById('canvas'), vertices)
   const menu = new Menu(vertices, canvas)
 
-  window.addEventListener('resize', e => canvas.resize(window.innerWidth, window.innerHeight))
+  window.addEventListener('resize', () => canvas.resize(window.innerWidth, window.innerHeight))
 
   feedInitalGraph(vertices, menu)
 

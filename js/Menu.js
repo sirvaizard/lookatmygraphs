@@ -186,11 +186,11 @@ class Menu {
   renderAdjs(vertex) {
     if (vertex) {
       this.adjacencyHTMLListContent = vertex.adj.reduce((html, adj, index) => {
-        return html += `<li class="adj-item">
+        return html += `<li class="adjacency-ul-item">
             ${adj.source.value}
             <i class="fas fa-long-arrow-alt-right fa-lg" style="color: #444;"></i>
             ${adj.destination.value}
-            <button class="delete-adj-btn" data-id=${index}>
+            <button class="delete-adjacency-btn" data-id=${index}>
               <i class="far fa-trash-alt fa-2x" style="color: #444;"></i>
             </button>
           </li>`

@@ -79,8 +79,9 @@ footer strong {
   flex: 1;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .menu ul {
@@ -100,6 +101,14 @@ footer strong {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.menu::-webkit-scrollbar {
+  background-color: #ffffff;
+}
+
+.menu::-webkit-scrollbar:hover {
+  background-color: #e0e0e0;
 }
 
 .menu select {
@@ -161,11 +170,10 @@ footer strong {
 
 .menu-container {
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  
+
   padding: 10px 0;
 
   border-bottom: 2px solid #e2e2e2;
@@ -193,30 +201,28 @@ footer strong {
   align-items: center;
 }
 
-ul.adjs-list {
+ul.adjacency-list {
   width: 120px;
 }
 
-li.adj-item {
+li.adjacency-ul-item {
   display: flex;
   flex: 1;
   justify-content: space-between;
 }
 
-.delete-adj-btn {
+.delete-adjacency-btn {
   border: none;
   background-color: transparent;
   height: 40px;
 }
 
-.adj-container {
+.adjacency-container {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 300px;
-  overflow-y: auto;
+  flex: 1;
 }
 
 .modal {
