@@ -1,6 +1,6 @@
 import Edge from "./Edge.js"
 
-class Vertice {
+class Vertex {
   constructor(x, y, value, radius = 25) {
     this.x = x
     this.y = y
@@ -16,9 +16,9 @@ class Vertice {
     this.adj.splice(index, 1)
   }
 
-  connect(vertice, cost) {
-    this.adj.push(new Edge(this, vertice, cost))
+  connect(vertex, cost) {
+    this.adj.push(new Edge(this, vertex, cost))
   }
 }
 
-export default Vertice
+export default Vertex

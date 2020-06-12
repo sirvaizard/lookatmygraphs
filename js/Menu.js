@@ -1,4 +1,4 @@
-import Vertice from './Vertice.js'
+import Vertex from './Vertex.js'
 
 import depthFirstSearch from './utils/depthFirstSearch.js'
 import breadthFirstSearch from './utils/breadthFirstSearch.js'
@@ -7,16 +7,18 @@ class Menu {
   constructor(vertices, canvas) {
     this.canvas = canvas // remover
     this.vertices = vertices
-    this.verticesSelection = document.querySelector('.menu .selected-vertice-input')
+    this.isSearching = false
+
+    this.verticesSelection = document.querySelector('.menu .selected-vertex-input')
     this.adjsList = document.querySelector('.menu .adjs-list')
     this.adjsSelect = document.querySelector('.menu .adjs-select')
-    this.verticeBtn = document.querySelector('button[data-create-vertice]')
+    this.vertexBtn = document.querySelector('button[data-create-vertex]')
     this.connectBtn = document.querySelector('.create-connect-btn')
-    this.verticeValue = document.getElementById('vertice-value')
-    this.verticeX = document.getElementById('vertice-x')
-    this.verticeY = document.getElementById('vertice-y')
+    this.vertexValue = document.getElementById('vertex-value')
+    this.vertexX = document.getElementById('vertex-x')
+    this.vertexY = document.getElementById('vertex-y')
 
-    this.deleteVerticeBtn = document.querySelector('button[data-delete-vertice]')
+    this.deleteVertexBtn = document.querySelector('button[data-delete-vertex]')
     this.deleteGraphBtn = document.querySelector('button[data-delete-graph]')
 
     this.bfsButton = document.querySelector('button[data-breadth-first-search]')
@@ -29,67 +31,66 @@ class Menu {
     this.modalText = document.querySelector('.side-modal p')
 
     this.adjsHTML = ''
-    this.verticeSelected = 0
+    this.vertexSelected = 0
     this.adjSelected = null
-    this.selectedVertice = null
+    this.selectedVertex = null
 
-    this.isSearching = false
 
     this.init()
   }
 
   init() {
-    this.verticeBtn.addEventListener('click', e => {
+    this.vertexBtn.addEventListener('click', e => {
       e.preventDefault()
 
-      if (this.vertices.find(ver => ver.value === Number(this.verticeValue.value)))
+      if (this.vertices.find(ver => ver.value === Number(this.vertexValue.value)))
         return alert('Vertice com esse valor já existe')
 
-      if (!this.verticeValue.value || !this.verticeX.value || !this.verticeY.value)
+      if (!this.vertexValue.value || !this.vertexX.value || !this.vertexY.value)
         return alert('Valores em branco')
 
-      const vertice = new Vertice(
-        Number(this.verticeX.value),
-        Number(this.verticeY.value),
-        Number(this.verticeValue.value))
+      const vertex = new Vertex(
+        Number(this.vertexX.value),
+        Number(this.vertexY.value),
+        Number(this.vertexValue.value))
 
-      this.vertices.push(vertice)
+      this.vertices.push(vertex)
 
-      this.renderAdjs(vertice)
+      this.renderAdjs(vertex)
       this.render()
-      this.setSelected(vertice, this.vertices.length - 1)
+      this.setSelected(vertex, this.vertices.length - 1)
       this.canvas.drawGraph(this.vertices)
     })
 
     this.connectBtn.addEventListener('click', e => {
-      if (!this.adjSelected || !this.verticeSelected) return
+      if (!this.adjSelected || !this.vertexSelected) return
 
-      const toConnectVertice = this.vertices.find(ver => ver.value === this.adjSelected)
+      const toConnectVertex = this.vertices.find(ver => ver.value === this.adjSelected)
 
       // definir uma variavel com vertice selecionado e tirar esse iterador
       // const vertice = this.vertices.find(ver => ver.selected)
-      const vertice = this.vertices.find(ver => ver.value === this.verticeSelected)
-      vertice.connect(toConnectVertice)
+      const vertex = this.vertices.find(ver => ver.value === this.vertexSelected)
+      vertex.connect(toConnectVertex)
 
       this.adjSelected = Number(this.adjsSelect.options[this.adjsSelect.selectedIndex].value) || null
 
-      this.renderAdjs(vertice)
+      this.renderAdjs(vertex)
       this.canvas.drawGraph(this.vertices)
     })
 
     this.verticesSelection.addEventListener('change', e => {
       if (this.verticesSelection.options[this.verticesSelection.selectedIndex])
-        this.verticeSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
+        this.vertexSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
 
       const active = Number(e.target.value)
       // abstrair para um metodo!
-      this.vertices.forEach(vertice => {
-        if (vertice.value === active) {
-          this.selectedVertice = vertice
-          vertice.selected = true
-          this.renderAdjs(vertice)
+      this.vertices.forEach(vertex => {
+        if (vertex.value === active) {
+          this.selectedVertex = vertex
+          vertex.selected = true
+          this.renderAdjs(vertex)
         } else {
-          vertice.selected = false
+          vertex.selected = false
         }
       })
       this.canvas.drawGraph(this.vertices)
@@ -103,7 +104,7 @@ class Menu {
     this.bfsButton.addEventListener('click', () => {
       this.sideModal.style.visibility = 'visible'
       this.sideModal.style.opacity = 1
-      breadthFirstSearch(this.selectedVertice,
+      breadthFirstSearch(this.selectedVertex,
         Number(this.valueToFind.value),
         this.canvas,
         Math.abs(Number(this.searchSpeedInput.value)) || 1000
@@ -115,7 +116,7 @@ class Menu {
     this.dfsButton.addEventListener('click', () => {
       this.sideModal.style.visibility = 'visible'
       this.sideModal.style.opacity = 1
-      depthFirstSearch(this.selectedVertice,
+      depthFirstSearch(this.selectedVertex,
         Number(this.valueToFind.value),
         this.canvas,
         Math.abs(Number(this.searchSpeedInput.value)) || 1000
@@ -125,7 +126,7 @@ class Menu {
     })
 
     this.closeSideModalBtn.addEventListener('click', () => {
-      this.vertices.forEach(vertice => vertice.color = 0)
+      this.vertices.forEach(vertex => vertex.color = 0)
       this.modalText.innerHTML = 'Procurando...'
       this.closeSideModalBtn.style.visibility = 'hidden'
       this.sideModal.style.visibility = 'hidden'
@@ -133,30 +134,30 @@ class Menu {
       this.canvas.drawGraph()
     })
 
-    this.deleteVerticeBtn.addEventListener('click', this.deleteVertice)
+    this.deleteVertexBtn.addEventListener('click', this.deleteVertex)
 
     this.deleteGraphBtn.addEventListener('click', () => {
-      while (this.selectedVertice)
-        this.deleteVertice()
+      while (this.selectedVertex)
+        this.deleteVertex()
     })
   }
 
-  deleteVertice = () => {
-    if (!this.selectedVertice)
+  deleteVertex = () => {
+    if (!this.selectedVertex)
       return
 
-    this.vertices.forEach(vertice => {
-      vertice.adj.forEach((edge, index) => {
-        if (edge.destination === this.selectedVertice)
-          vertice.disconnect(index)
+    this.vertices.forEach(vertex => {
+      vertex.adj.forEach((edge, index) => {
+        if (edge.destination === this.selectedVertex)
+          vertex.disconnect(index)
       })
     })
 
-    const index = this.vertices.findIndex(vertice => vertice.value === this.selectedVertice.value)
+    const index = this.vertices.findIndex(vertex => vertex.value === this.selectedVertex.value)
     this.vertices.splice(index, 1)
 
     if (this.vertices.length === 0)
-      this.selectedVertice = null
+      this.selectedVertex = null
 
     this.setSelected(this.vertices[0], 0)
     this.render()
@@ -169,32 +170,32 @@ class Menu {
   }
 
   setCoords(x, y) {
-    this.verticeX.value = x
-    this.verticeY.value = y
+    this.vertexX.value = x
+    this.vertexY.value = y
   }
 
-  setSelected(vertice, index) {
-    if (vertice) {
+  setSelected(vertex, index) {
+    if (vertex) {
       this.verticesSelection.selectedIndex = index
-      if (this.selectedVertice)
-        this.selectedVertice.selected = false
-      vertice.selected = true
-      this.selectedVertice = vertice
+      if (this.selectedVertex)
+        this.selectedVertex.selected = false
+      vertex.selected = true
+      this.selectedVertex = vertex
 
 
       if (this.verticesSelection.options[this.verticesSelection.selectedIndex])
-        this.verticeSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
+        this.vertexSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
     } else {
 
     }
 
-    this.renderAdjs(this.selectedVertice)
+    this.renderAdjs(this.selectedVertex)
     this.canvas.drawGraph(this.vertices)
   }
 
-  renderAdjs(vertice) {
-    if (vertice) {
-      this.adjsHTML = vertice.adj.reduce((html, adj, index) => {
+  renderAdjs(vertex) {
+    if (vertex) {
+      this.adjsHTML = vertex.adj.reduce((html, adj, index) => {
         return html += `<li class="adj-item">
             ${adj.source.value}
             <i class="fas fa-long-arrow-alt-right fa-lg" style="color: #444;"></i>
@@ -205,12 +206,12 @@ class Menu {
           </li>`
       }, '')
 
-      const adjacentSelectValue = this.vertices.reduce((html, currentVertice) => {
-        if (vertice.adj.find(edge => edge.destination == currentVertice))
+      const adjacentSelectValue = this.vertices.reduce((html, currentVertex) => {
+        if (vertex.adj.find(edge => edge.destination == currentVertex))
           return html
 
-        if (!(vertice.value === currentVertice.value))
-          return html += `<option value="${currentVertice.value}">${currentVertice.value}</option>`
+        if (!(vertex.value === currentVertex.value))
+          return html += `<option value="${currentVertex.value}">${currentVertex.value}</option>`
         return html
       }, '')
 
@@ -227,8 +228,8 @@ class Menu {
     // add event listener to all trash icons
     const buttons = document.querySelectorAll('button.delete-adj-btn')
     buttons.forEach(button => button.addEventListener('click', () => {
-      vertice.disconnect(button.getAttribute('data-id'))
-      this.renderAdjs(vertice)
+      vertex.disconnect(button.getAttribute('data-id'))
+      this.renderAdjs(vertex)
       this.canvas.drawGraph(this.vertices)
     }))
 
@@ -237,12 +238,12 @@ class Menu {
   }
 
   render() {
-    this.verticesSelection.innerHTML = this.vertices.reduce((html, vertice) => {
-      return html += `<option value="${vertice.value}">${vertice.value}</option>`
+    this.verticesSelection.innerHTML = this.vertices.reduce((html, vertex) => {
+      return html += `<option value="${vertex.value}">${vertex.value}</option>`
     }, '')
 
     if (this.verticesSelection.options[this.verticesSelection.selectedIndex])
-      this.verticeSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
+      this.vertexSelected = Number(this.verticesSelection.options[this.verticesSelection.selectedIndex].value)
   }
 }
 
